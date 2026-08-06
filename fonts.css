@@ -1,0 +1,74 @@
+/* ===========================================================
+   Monoplex KR — 자가 호스팅 웹폰트 (@font-face)
+   IBM Plex Mono + IBM Plex Sans KR 공동 설계 모노. 영문·한글 통일.
+   파일은 frontend/public/fonts/ 에 있어 /fonts/ 로 서빙된다.
+
+   주의: @font-face 의 font-family 선언은 styles.css 에 두지 않는다.
+   fontPolicy.test.ts 가 styles.css 의 모든 font-family 를 검사하므로
+   여기(별도 파일)에 둬야 정책 테스트와 충돌하지 않는다.
+   전역 폰트 토큰(--font-mono)은 styles.css 의 :root 에 있다.
+   =========================================================== */
+@font-face {
+  font-family: 'Monoplex KR';
+  src: url('/fonts/MonoplexKR-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Monoplex KR';
+  src: url('/fonts/MonoplexKR-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Monoplex KR';
+  src: url('/fonts/MonoplexKR-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Monoplex KR';
+  src: url('/fonts/MonoplexKR-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Monoplex KR';
+  src: url('/fonts/MonoplexKR-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===========================================================
+   Material Symbols Outlined — 자가 호스팅 (2026-08-04)
+
+   예전엔 fonts.googleapis.com 에서 받았다. 사내는 폐쇄망이라 그 호스트가 막혀 있고
+   (사내 확인: DNS 는 해석되는데 TCP 가 10초 타임아웃), 이 폰트는 **ligature 방식**이라
+   못 받으면 아이콘 자리에 'search'·'close'·'more_vert' 가 글자로 남는다.
+
+   ⚠️ font-display 는 swap 이 아니라 **block** 이다. 본문 폰트와 반대로 가는 이유:
+   본문은 대체 폰트로라도 글을 읽을 수 있으니 swap 이 맞지만, 아이콘은 대체 폰트로 그리면
+   ligature 가 풀려 **영문 단어가 그대로 보인다.** 그건 "덜 예쁜 아이콘"이 아니라 다른
+   내용이다. block 은 폰트를 기다리는 동안 자리를 비워두므로, 아주 잠깐 빈 칸이었다가
+   아이콘이 나타난다 — 글자가 나타났다 아이콘으로 바뀌는 것보다 낫다.
+
+   서브셋을 만들지 않는다: 아이콘 이름 일부가 코드에서 동적으로 정해져
+   (`isChecked ? 'check_box' : 'check_box_outline_blank'`) 허용목록 기반 서브셋은
+   아이콘을 하나 추가할 때마다 목록을 같이 안 고치면 조용히 깨진다. 748KB 한 번 캐시가
+   그 유지보수 위험보다 싸다.
+
+   갱신 방법: fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400 이
+   가리키는 woff2 를 받아 public/fonts/ 에 덮어쓴다. **사외에서** 해야 한다.
+   =========================================================== */
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  src: url('/fonts/MaterialSymbolsOutlined.woff2') format('woff2');
+  font-weight: 300 400;
+  font-style: normal;
+  font-display: block;
+}
